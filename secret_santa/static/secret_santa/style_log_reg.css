@@ -1,0 +1,65 @@
+.main {
+    background-color:rgb(49, 133, 49);
+    height: 100%;
+    width:90%;
+    padding: 10px
+}
+.tree {
+    background: url('https://i2-prod.mirror.co.uk/incoming/article6948913.ece/ALTERNATES/s482b/Christmas-tree-presents.jpg') no-repeat center;
+    background-size:cover
+}
+.present {
+    background: url('santa_ver_1/blue_present.jpg')
+}
+.red {
+    background-color:rgb(201, 40, 40)
+}
+.green {
+    background-color:rgb(74, 230, 74)
+}
+.out {
+    border-style:outset
+}
+
+center {
+    align:center;
+    text-align: center
+}
+.row {
+    margin-bottom:30px
+}
+.white{
+    color:whitesmoke
+}
+.il {
+    display:inline
+}
+.list {
+    background: url('santa_ver_1/santa_hat_list.jpg')
+}
+.bnone {
+    background:transparent
+}
+.hextend {
+    min-height: 750px
+}
+.black {
+    color:rgb(65, 62, 62)
+}
+.rpadding {
+    padding-right:10px;
+    padding-bottom:5px;
+}
+.f16{
+    font-size: 16px
+}
+.blue {
+    color:rgb(73, 73, 212)
+}
+.small_pic {
+    height: 25px;
+    width:25px
+}
+.nbm {
+    margin-bottom:0
+}

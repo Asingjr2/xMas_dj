@@ -1,0 +1,92 @@
+{% extends 'santa_layout.html' %}
+
+{% load staticfiles %}
+
+{% block meta_title %}Secret Santa {% endblock %}
+{% block meta_description %}Secrete Santa User HomePage{% endblock %}
+{% block meta_og_title %}Santa List{% endblock %}
+{% block meta_og_description %}Explore Lists{% endblock %}
+
+{% block body %}
+<div class="container main out tree hextend ">
+    <div class="row">
+        <div class='col-sm-1'></div>
+        <div class="col-sm-5">
+            <h2 class="  green il out">Welcome {{ user.alias }} </h2>
+        </div>
+        <div class='col-sm-3'>
+            <h4 class="green out il rpadding "> Lists Built <span class="label label-default">{{ user.list_set.all.count}}</span>
+            </h4>
+        </div>
+        <div class='col-sm-1'></div>
+        <div class='col-sm-2'>
+            <a href="">
+                <button class="btn green black f16"> Main </button>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 ">
+            <div class="jumbotron out red">
+                <form action="{% url 'secret_santa:santa_home' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name='creator' value="user10">
+                    {% if messages%} 
+                    {% for message in messages %}
+                    <p> {{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {{ form.as_p }}
+                    <input type="submit" value="CREATE LIST">
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% if user.list_set.all.count > 0 %}
+    <div class="row">
+        <div class="col-sm-1"> </div>
+        <div class='col-sm-10'>
+            <table class="table table-hover table-bordered green out">
+            <thead class="white">
+                <tr>
+                    <th class="f16"> <p>#</p></th>
+                    <th class="f16">List Name</th>
+                    <th class="f16">Gift Max</th>
+                    <th class="f16">Total Members</th>
+                    <th class="f16">Options (Secret Santa Requires Generator 3 or more)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in user.list_set.all %}
+                <tr>
+                    <td class="f16"> {{ forloop.counter }} </td>
+                    <td class="f16"> {{ list.list_name }}</td>
+                    <td class="f16"> {{ list.gift_max}} Dollars</td>
+                    <td class="f16">  {{ list.member_set.all.count }}</td>
+                    <td>
+                        <a class="f16" href="">Update </a> |
+                        <a class="f16" href="{% url 'secret_santa:delete_list' list.id %}"> Delete</a> |
+                        <a class="f16" href=""> Add Member </a> |
+                        {% if list.member_set.all.count > 0%}
+                        <a class="f16" href="">
+                            View Members</a>
+                        {% endif %}
+                        {% if list.member_set.all.count > 2 %}
+                        <a href="">
+                            <button class="btn btn-primary">Secret Santa </button>
+                                </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        <div class="col-sm-1"> </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form action="{% url 'log_reg' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="form-type" value="register">
+        {{ form.as_p }}
+        <input type="submit" value="CREATE USER">
+    </form>
+
+    <hr>
+    <br>
+    <form action="{% url 'log_reg' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="form-type" value="login"> 
+        {{ form2.as_table }}
+        <input type="submit" value="LOGIN USER">
+    </form>
+</body>
+</html>
