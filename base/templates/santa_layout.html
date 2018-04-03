@@ -4,12 +4,12 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="title" content="Secret Santa: {% block meta_title %}{% endblock %}">
+        <meta name="title" content="{% block meta_title %}{% endblock %}">
         <meta name="description" content="{% block meta_description %}{% endblock %}">
         <meta property="og:url" content="{{ request.get_full_path }}" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Secret Santa Clone: {% block meta_og_title %}{% endblock %}" />
-        <meta property="og:description" content="{% block meta_og_description %}{% endblock %}" />
+        <meta property="og:title" content="Secret Santa Gift List Creator website" />
+        <meta property="og:description" content="Secret Santa Gift List Creator" />
         <meta property="og:image" content="" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -19,21 +19,25 @@
         <title>Secret Santa</title>
         
         {% block extra_style %}{% endblock %}
-</head>
+    </head>
 
-
-<body>
-    <header>
-        <nav class="top_nav navbar navbar-expand">
-            <a href="" class="nav-link nav-item">SECRET SANTA -</a>
-            <a href="" class="nav-link nav-item">GAMES</a> -</a>
-            <a href="" class="nav-link nav-item">RANDOM - </a>
-        </nav>
-    </header>
-
-  
-
-    {% block body %}{% endblock %}
-    {% block extra_js %}{% endblock %}
-    </body>
+    <body>
+        <div class="container">
+            <header>
+                <div>
+                    <ul class="nav navbar-inverse navbar-right">
+                        <li>
+                            <a href="{% url 'secret_santa:santa_home' %}" class="nav-link nav-item">SECRET SANTA HOME</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'secret_santa:logout'%}" class="nav-link nav-item">LOGOUT</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            
+            {% block body %}{% endblock %}
+            {% block extra_js %}{% endblock %}
+        </div>
+</body>
 </html>

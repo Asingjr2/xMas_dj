@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import EmailValidator, MinLengthValidator, MaxLengthValidator, MinValueValidator, MaxValueValidator
+from django.core.validators import EmailValidator, MinLengthValidator, MinValueValidator, MaxValueValidator
+from django.urls import reverse
 
 from base.models import BaseModel
 
@@ -13,6 +14,9 @@ class List(BaseModel):
 
     def __unicode__(self):
         return 'List Name = {}'.format(self.list_name)
+
+    def get_absolute_url(self):
+        return reverse('list_detail', args=(self.id,))
 
 
 class Member(BaseModel):
@@ -27,6 +31,8 @@ class Member(BaseModel):
         return 'Member {}'.format(self.full_name)
 
 
-class List_Member(BaseModel):
-    lists = models.ManyToManyField(List)
-    members = models.ManyToManyField(Member)
+class GiftPair(BaseModel):
+    gift_pair_original_list = models.ForeignKey(List, on_delete=models.CASCADE)
+    santa = models.CharField(max_length=100, validators = [ MinLengthValidator(10)])
+    gift_receiver = models.ForeignKey( Member, on_delete=models.CASCADE)
+    
