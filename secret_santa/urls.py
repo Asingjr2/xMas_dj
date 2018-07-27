@@ -1,7 +1,17 @@
 from django.urls import path
 
 from . import views
-from .views import HomeView, EnterMembersView, DeleteListView, DeleteMemberView, ListDetailView, UpdateMemberView, UpdateListView, AddMemberView, GiftPairsView
+from .views import (
+    HomeView,
+    EnterMembersView,
+    DeleteListView,
+    DeleteMemberView,
+    ListDetailView,
+    UpdateMemberView,
+    UpdateListView,
+    AddMemberView,
+    GiftPairsView
+)
 
 app_name = "secret_santa"
 urlpatterns = [

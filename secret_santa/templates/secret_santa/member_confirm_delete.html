@@ -1,7 +1,7 @@
 {% extends 'santa_layout.html' %}
 {% block body %}
     <form action="" method="post">{% csrf_token %}
-        <p>Are you sure you want to delete "{{ object.list_name }}"?</p>
+        <p>Are you sure you want to delete "{{ object.full_name }}"?</p>
         <input type="submit" value="Confirm" />
     </form>
 {% endblock %}

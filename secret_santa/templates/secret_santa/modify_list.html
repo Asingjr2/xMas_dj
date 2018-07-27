@@ -1,0 +1,32 @@
+{% extends 'santa_layout.html' %}
+{% block meta_title %}Secret Santa List Modify Page{% endblock %}
+{% block body %}
+    <div class="jumbotron out red">
+        <form action="{% url 'secret_santa:santa_home' %}" method="POST">
+            {% csrf_token %}
+            {% if messages%} 
+                {% for message in messages %}
+                    <p> {{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            <input type="hidden" name="list_id" value="{{ list.id }}" id="">
+            <input type="text" name="list_name">
+            <input type="integer" name="gift_max">
+            <input type="submit" value="UPDATE LIST">
+        </form>
+    </div>
+
+    <div class="jumbotron out red">
+        <h1>LIST {{ current_list.list_name }}</h1>
+        <form action="{% url 'secret_santa:enter_members' %}" method="POST">
+            {% csrf_token %}
+            {% if messages%} 
+                {% for message in messages %}
+                    <p> {{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            {{ form.as_p }}
+            <input type="submit" value="ADD MEMBER">
+        </form>
+    </div>
+{% endblock %}

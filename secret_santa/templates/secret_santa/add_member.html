@@ -1,0 +1,27 @@
+{% extends 'santa_layout.html' %}
+
+{% load staticfiles %}
+{% block meta_title %}Secret Santa Add Members Page{% endblock %}
+
+{% block body %}
+    <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 ">
+                <div class="jumbotron">
+                        <h1>LIST {{ current_list.list_name }}</h1>
+                        <form action="{% url 'secret_santa:add_member' current_list.id %}" method="POST">
+                            {% csrf_token %}
+                            {% if messages%} 
+                            {% for message in messages %}
+                            <p> {{ message }}</p>
+                            {% endfor %}
+                            {% endif %}
+                            <input type="hidden" name="list_id" value="{{ current_list.id }}">
+                            {{ form.as_p }}
+                            <input type="submit" value="ADD MEMBER">
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

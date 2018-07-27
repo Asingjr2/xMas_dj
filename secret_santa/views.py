@@ -1,20 +1,19 @@
 import datetime
 from random import shuffle
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import logout
-from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
-from django.views.generic.edit import DeleteView, UpdateView
-from django.contrib.auth.models import User
 from django.views import View
+from django.contrib.auth import logout
+from django.contrib.auth.models import User
 from django.urls import reverse, reverse_lazy
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import DeleteView, UpdateView
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import List, Member, GiftPair
 from .forms import ListForm, MemberForm, ModifyListForm
 
-class HomeView(View):
 
+class HomeView(View):
     def get(self, request):
         today = datetime.date.today()
         current_day = today.strftime('%A, %x')
@@ -58,7 +57,6 @@ class DeleteMemberView(DeleteView):
 
 
 class EnterMembersView(View):
-    
     def get(self, request):
         form = MemberForm()
         current_list = List.objects.last()
@@ -96,7 +94,6 @@ class UpdateMemberView(UpdateView):
 
 
 class AddMemberView(View):
-
     def get(self, request, pk):
             form = MemberForm()
             current_list = List.objects.get(id= pk)
@@ -142,7 +139,6 @@ class ModifyListView(View):
 
  
 class GiftPairsView(View):
-    
     def get(self, request, pk):
         original_list = List.objects.get(id = pk)
         return render(request, "secret_santa/secret_santa_list.html", {"original_list": original_list})

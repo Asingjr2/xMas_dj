@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import View
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect, HttpResponse
 
 from .forms import RegisterForm, LoginForm
 
@@ -12,6 +12,7 @@ class LogRegView(View):
     def get(self, request):
         form = self.form_class(None) # none = not bound
         form2 = LoginForm()
+        
         if request.user is not None:
             print(request.user.username)
         return render(request, self.template_name, {"form":form, "form2":form2})
@@ -19,6 +20,7 @@ class LogRegView(View):
     def post(self,request):
         form = self.form_class(None) 
         form2 = LoginForm()
+
         # Actions based on hidden form-type field
         if request.POST["form-type"] == "register":
     
