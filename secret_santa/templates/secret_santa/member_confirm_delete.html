@@ -1,7 +1,9 @@
 {% extends 'santa_layout.html' %}
 {% block body %}
+<div class="jumbotron">
     <form action="" method="post">{% csrf_token %}
         <p>Are you sure you want to delete "{{ object.full_name }}"?</p>
         <input type="submit" value="Confirm" />
     </form>
+</div>
 {% endblock %}

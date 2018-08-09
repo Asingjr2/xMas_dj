@@ -22,7 +22,7 @@ class Member(BaseModel):
     member_list = models.ForeignKey(List, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100, validators = [MinLengthValidator(3)])
     email = models.CharField( max_length=200, default='unknown', validators = [EmailValidator])
-    telephone = models.CharField(max_length=10, default='1234567890', validators = [MinLengthValidator(10)])
+    telephone = models.CharField(max_length=10, default='9999999999', validators = [MinLengthValidator(10)])
 
     def __unicode__(self):
         return 'Member {}'.format(self.full_name)

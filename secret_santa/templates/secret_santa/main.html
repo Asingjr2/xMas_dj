@@ -2,33 +2,16 @@
 {% load staticfiles %}
 {% block meta_title %}Secret Santa{% endblock %}
 {% block body %}
-    <section>
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8 ">
-                <form action="{% url 'secret_santa:santa_home' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name='creator' value="{{ request.user.username }}">
-                    {% if messages%} 
-                    {% for message in messages %}
-                    <p> {{ message }}</p>
-                    {% endfor %}
-                    {% endif %}
-                    {{ form.as_table }}
-                    <input type="submit" value="CREATE LIST">
-                </form>
-            </div>
-        </div>
-        
+    <section >
         {% if user.list_set.all.count > 0 %}
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class='col-sm-10'>
-                <table class="table table-hover table-bordered">
-                <thead class="white">
+        <div class="row" id="mt">
+            <div class="col-sm-6"> </div>
+            <div class='col-sm-5' id="small_box" >
+                <table id="green" class="table table-hover table-bordered">
+                <thead >
                     <tr>
                         <th> <p>#</p></th>
-                        <th>List Name</th>
+                        <th id="test">List Name</th>
                         <th>Gift Max</th>
                         <th>Total Members</th>
                         <th>Options (Secret Santa Requires Generator 3 or more)</th>
@@ -42,7 +25,7 @@
                         <td> {{ list.gift_max}} Dollars</td>
                         <td>  {{ list.member_set.all.count }}</td>
                         <td>
-                            <a  href="{% url 'secret_santa:update_list' list.id %}">Modify </a> |
+                            <a  id="margin_rl" href="{% url 'secret_santa:update_list' list.id %}">Modify </a> |
                             <a href="{% url 'secret_santa:delete_list' list.id %}">Delete</a> |
                             <a href="{% url 'secret_santa:add_member' list.id %}"> Add Member </a> |
                             {% if list.member_set.all.count > 0%}
@@ -50,7 +33,7 @@
                             {% endif %}
                             {% if list.member_set.all.count > 2 %}
                                 <a href="{% url 'secret_santa:gift_pairs' list.id %}">
-                                    <button class="btn btn-primary">Secret Santa </button>
+                                    <button id="margin_rl" class="btn btn-primary">Secret Santa </button>
                                 </a>
                             {% endif %}
                         </td>
@@ -60,6 +43,13 @@
             </table>
             </div>
             <div class="col-sm-1"> </div>
+        {% endif %}
+        {% if user.list_set.all.count == 0 %}
+        <div class="container">
+            <div class="jumbotron" id="no_lists">
+                <h1>USE FORM ABOVE TO CREATE A LIST</h1>
+            </div>
+        </div>
         {% endif %}
     </section>
 {% endblock %}

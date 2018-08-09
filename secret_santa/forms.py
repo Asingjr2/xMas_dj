@@ -7,13 +7,13 @@ from .models import List, Member
 
 
 class ListForm(forms.Form):
-    list_name = forms.CharField( max_length=255, min_length=3)
+    list_name = forms.CharField( max_length=255, min_length=6)
     gift_max= forms.IntegerField(validators = [MaxValueValidator(1000), MinValueValidator(0)], widget = forms.NumberInput(attrs={'value': '40'}))
 
 
 
 class ModifyListForm(forms.Form):
-    list_name = forms.CharField( max_length=255, min_length=3)
+    list_name = forms.CharField( max_length=255, min_length=6)
     gift_max= forms.IntegerField(validators = [MaxValueValidator(1000), MinValueValidator(0)], widget = forms.NumberInput(attrs={'value': '40'}))
 
 class MemberForm(ModelForm):

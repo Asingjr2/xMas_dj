@@ -7,9 +7,9 @@
     <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-8 ">
-                <div class="jumbotron">
+                <div class="jumbotron"  id="mt">
                         <h1>LIST {{ current_list.list_name }}</h1>
-                        <form action="{% url 'secret_santa:add_member' current_list.id %}" method="POST">
+                        <form id="green" action="{% url 'secret_santa:add_member' current_list.id %}" method="POST">
                             {% csrf_token %}
                             {% if messages%} 
                             {% for message in messages %}

@@ -37,10 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Internal
     'base', 
     'log_reg',
     'widgets',
-    'secret_santa'
+    'secret_santa',
+    # External
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +72,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Allauth setting
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -122,3 +131,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Allauth specific settings
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = "/secret_santa"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login/"

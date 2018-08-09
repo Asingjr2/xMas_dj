@@ -1,8 +1,8 @@
 {% extends 'santa_layout.html' %}
 {% block meta_title %}Secret Santa List Modify Page{% endblock %}
 {% block body %}
-    <div class="jumbotron out red">
-        <form action="{% url 'secret_santa:santa_home' %}" method="POST">
+    <div class="jumbotron out red" >
+        <form id="green"action="{% url 'secret_santa:santa_home' %}" method="POST">
             {% csrf_token %}
             {% if messages%} 
                 {% for message in messages %}

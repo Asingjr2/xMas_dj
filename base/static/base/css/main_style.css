@@ -1,0 +1,38 @@
+#top_nav{
+    background-color:rgb(144, 245, 114);
+    border-bottom: 2px black solid;
+}
+
+#mt{
+    margin-top: 30px;
+}
+#margin_rl{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#no_lists{
+    margin-top: 25px;
+}
+
+#main_back{
+    background-color: lightgreen;
+    background: url("http://www.witf.org/news/600x340-christmas-ornament.png");
+    background-size: cover;
+}
+#green{
+    background-color:rgb(144, 245, 114);
+}
+#white{
+    background-color:whitesmoke;
+    overflow: scroll;
+    border-radius: 1.5;
+}
+#float_right{
+    float: right;
+    background-color:rgb(144, 245, 114);
+}
+#small_box{
+    max-height: 350px;
+    overflow: auto;
+    overflow-y: scroll;
+}

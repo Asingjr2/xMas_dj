@@ -1,0 +1,26 @@
+.main {
+    background: url("http://www.witf.org/news/600x340-christmas-ornament.png");
+    background-size: cover;
+    height: 100%;
+    width:90%;
+    padding: 10px
+}
+#green{
+    background-color:rgb(192, 247, 175);
+    padding: 20px;
+    float: right;
+    margin-top: 30px;
+    margin-right: 25px;
+    width: 400px;
+}
+
+#box{
+    background-color:rgb(192, 247, 175);
+    padding: 20px;
+    margin-right: 25px;
+    width: 40%;
+}
+#test {
+    margin-top: 30px;
+    float: right;
+}

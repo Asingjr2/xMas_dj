@@ -19,7 +19,7 @@ class HomeView(View):
         current_day = today.strftime('%A, %x')
         xmas = datetime.date(2017, 12, 25)
         form = ListForm()
-        user = User.objects.get(username= str(request.user.username))
+        user = User.objects.get(username=str(request.user.username))
         context = {
         'today': current_day, 
         'xmas':xmas, 
@@ -31,10 +31,8 @@ class HomeView(View):
     def post(self, request):
         form = ListForm(request.POST)
         if form.is_valid():
-            print("list saved")
             List.objects.create(
                 list_name=form.cleaned_data['list_name'],
-                # Make this equal to user for login in
                 creator= User.objects.get(username = request.POST["creator"]),
                 gift_max= form.cleaned_data["gift_max"]
             )
@@ -80,14 +78,14 @@ class EnterMembersView(View):
 
 
 class UpdateListView(UpdateView):
-    model= List
+    model = List
     fields = ["list_name", "gift_max" ]
     template_name_suffix = "_update_form"
     success_url = reverse_lazy("secret_santa:santa_home")
 
 
 class UpdateMemberView(UpdateView):
-    model= Member
+    model = Member
     fields = ["full_name", "email", "telephone"]
     template_name_suffix = "_update_form"
     success_url = reverse_lazy("secret_santa:santa_home")
@@ -113,11 +111,10 @@ class AddMemberView(View):
                 email=form.cleaned_data['email'],
                 telephone=form.cleaned_data['telephone'],
             )
-        return redirect("secret_santa:santa_home")
+        return redirect("/secret_santa/add_member/{}".format(request.POST["list_id"]))
 
 
 class ModifyListView(View):
-    
     def get(self, request):
         form = ModifyListForm()
         user = User.objects.get(username= request.user.username)
@@ -130,7 +127,6 @@ class ModifyListView(View):
     def post(self, request):
         form = ModifyListForm(request.POST)
         if form.is_valid():
-            print("list saved")
             list_to_update = List.objects.get(list.id == request.POST["list.id"])
             list_to_update.list_name = form.cleaned_data['list_name']
             list_to_update.gift_max = form.cleaned_data['gift_max']
@@ -140,8 +136,8 @@ class ModifyListView(View):
  
 class GiftPairsView(View):
     def get(self, request, pk):
-        original_list = List.objects.get(id = pk)
-        return render(request, "secret_santa/secret_santa_list.html", {"original_list": original_list})
+        original_list = List.objects.get(id=pk)
+        return render(request, "secret_santa/secret_santa_list.html", {"original_list":original_list})
 
     def post(self, request, pk):
         current_list = List.objects.get(id = pk)
@@ -151,15 +147,12 @@ class GiftPairsView(View):
                     pair.delete()
         reordered_current_list_members = list(current_list.member_set.all())
         shuffle(reordered_current_list_members)
-        print(reordered_current_list_members)
         string_gift_pairs_dict = {}
         for i, person in enumerate(reordered_current_list_members):
             try:
                 string_gift_pairs_dict[person.full_name] = reordered_current_list_members[i+1]
-                print("pair added")
             except IndexError:
                 string_gift_pairs_dict[person.full_name] = reordered_current_list_members[0]
-                print("pair not added")
         
         for k,v in string_gift_pairs_dict.items():
             GiftPair.objects.create(
@@ -168,8 +161,3 @@ class GiftPairsView(View):
                 gift_receiver = Member.objects.get(id = v.id)
             )
         return redirect("secret_santa:gift_pairs",  pk=current_list.id)
-
-
-def logout_view(request):
-    logout(request)
-    return redirect("/")

@@ -2,49 +2,44 @@
 {% load staticfiles %}
 {% block meta_title %}Secret Santa List Detail{% endblock %}
 {% block body %}
-    <section>
-        <ul>
-            <li>{{ object.list_name}}</li>
-            <li>{{ object.gift_max }}</li>
-            <li> {{ object.member_set.all.count}}</li>
-        </ul>
-    </section>
 
-    {% if object.member_set.all.count > 0 %}
-    <div class="row">
+{% if object.member_set.all.count > 0 %}
+<div>
+    <div class="row" id="mt">
         <div class="col-sm-1"> </div>
-        <div class='col-sm-10'>
-            <table class="table table-hover table-bordered">
-            <thead class="white">
-                <tr>
-                    <th> <p>#</p></th>
-                    <th> Name</th>
-                    <th> Email</th>
-                    <th> Phone</th>
-                    <th> Update</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for mem in object.member_set.all %}
-                <tr>
-                    <td> {{ forloop.counter }} </td>
-                    <td> {{ mem.full_name }}</td>
-                    <td> {{  mem.email }} </td>
-                    <td>  {{  mem.telephone }}</td>
-                    <td>
-                        <a href="{% url 'secret_santa:update_member' mem.id %}">
-                            Update 
-                        </a> |
-                        <a href="{% url 'secret_santa:delete_member' mem.id %}">
-                            Delete
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
+        <div class='col-sm-10' >
+            <table id="green" class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th> <p>#</p></th>
+                        <th> Name</th>
+                        <th> Email</th>
+                        <th> Phone</th>
+                        <th> Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mem in object.member_set.all %}
+                    <tr>
+                        <td> {{ forloop.counter }} </td>
+                        <td> {{ mem.full_name }}</td>
+                        <td> {{  mem.email }} </td>
+                        <td>  {{  mem.telephone }}</td>
+                        <td>
+                            <a href="{% url 'secret_santa:update_member' mem.id %}">
+                                Update 
+                            </a> |
+                            <a href="{% url 'secret_santa:delete_member' mem.id %}">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
         <div class="col-sm-1"> </div>
     </div>
+</div>
 {% endif %}
 {% endblock %}

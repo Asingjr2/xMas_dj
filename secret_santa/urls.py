@@ -29,6 +29,4 @@ urlpatterns = [
     path('add_member/<uuid:pk>', AddMemberView.as_view(), name='add_member'),
     path('update/<uuid:pk>/', UpdateMemberView.as_view(), name='update_member'),
     path('delete/<uuid:pk>/', DeleteMemberView.as_view(), name='delete_member'),
-
-    path('logout/', views.logout_view, name="logout"),
 ]

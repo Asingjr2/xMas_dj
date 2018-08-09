@@ -1,4 +1,4 @@
-{% load static %}
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html>
@@ -11,33 +11,37 @@
         <meta property="og:title" content="Secret Santa Gift List Creator website" />
         <meta property="og:description" content="Secret Santa Gift List Creator" />
         <meta property="og:image" content="" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="{% static 'base/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'base/css/main_style.css' %}">
         <title>Secret Santa</title>
         
-        {% block extra_style %}{% endblock %}
     </head>
 
-    <body>
-        <div class="container">
-            <header>
-                <div>
-                    <ul class="nav navbar-inverse navbar-right">
-                        <li>
-                            <a href="{% url 'secret_santa:santa_home' %}" class="nav-link nav-item">SECRET SANTA HOME</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'secret_santa:logout'%}" class="nav-link nav-item">LOGOUT</a>
-                        </li>
-                    </ul>
-                </div>
-            </header>
-            
-            {% block body %}{% endblock %}
-            {% block extra_js %}{% endblock %}
+<body id="main_back">
+    <div class="container"></div>
+        <div>
+            <nav class="navbar navbar-light" id="top_nav">
+                <button><a href="">
+                    <a href="{% url 'secret_santa:santa_home' %}" class="nav-link nav-item">SECRET SANTA HOME</a>
+                </button>
+                
+                <form action="{% url 'secret_santa:santa_home' %}" method="POST" id="mt">
+                    {% csrf_token %}
+                    <input id="test" type="hidden" name='creator' value="{{ request.user.username }}">
+                    {{ form.as_table }}
+                    <input type="submit" value="CREATE LIST">
+                </form>
+                <button>
+                    <a href="/accounts/logout" class="nav-link nav-item">LOGOUT</a>
+                </button>
+            </nav>
         </div>
+        {% block body %}{% endblock %}
+        {% block extra_js %}{% endblock %}
+    </div>
 </body>
 </html>
