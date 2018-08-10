@@ -13,9 +13,10 @@ from secret_santa.factories import ListFactory, MemberFactory, GiftPairFactory, 
 
 class HomeViewTestCase(TestCase):
     def test_200(self):
+        user = UserFactory()
         url = reverse('secret_santa:santa_home')
         client = Client()
-        client.force_login(User)
+        client.force_login(user)
         response = client.get(url)
         self.assertEqual(response.status_code, 200)
 
