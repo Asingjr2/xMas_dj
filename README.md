@@ -1,10 +1,6 @@
 # xMas
 
-## Purpose
-
-```bash
-App allows user to create secret santa gift list with randomly generated pairings
-```
+Application allows user to create secret santa gift list with randomly generated pairings.  Can create different pairings.
 
 ## Installation
 
